@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body{
+
+
+     
+    }
+    div:hover{
+      color:blue;
+    }
+    div{
+      text-align: center;
+    }
+     .z-container { position: relative; height: 100px; }
+    .z-box {
+      width: 100px; height: 100px; position: absolute; opacity: 0.8;
+    }
+    .z1 { background: red; left: 30px; top: 0; z-index: 0; }
+    .z2 { background: blue; left: 60px; top: 20px; z-index: 0; }
+    
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <div  >
+    Hello
+  </div>
+  <div class="container">
+    
+  </div>
+
+  <h2>6. z-index Example</h2>
+  <div class="z-container">
+    <div class="z-box z1">z=1</div>
+    <div class="z-box z2">z=2</div>
+  </div>
+</body>
+</html>

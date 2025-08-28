@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Day 2 - CSS Basics</title>
+  <style>
+    /* Universal reset */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f8f8f8; }
+    h2 { margin: 20px 0 10px; color: #222; }
+
+    /* 1. Class vs ID */
+    .class-demo { color: green; }
+    #id-demo { color: blue; }
+
+    /* 2. Specificity Example */
+    p { color: gray; }
+    .highlight { color: orange; }
+    #specific { color: red; }
+
+    /* 3. Box Model */
+    .box {
+      width: 200px;
+      padding: 20px;
+      border: 5px solid black;
+      margin: 15px;
+      background: lightblue;
+    }
+
+    /* 4. Flexbox Centering */
+    .flex-parent {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+      border: 2px dashed gray;
+      margin-bottom: 20px;
+    }
+    .flex-child {
+      width: 100px; height: 50px;
+      background: coral;
+      text-align: center;
+      line-height: 50px;
+    }
+
+    /* 5. Visibility vs Display */
+    .hidden { visibility: hidden; background: yellow; }
+    .none { display: none; background: pink; }
+
+    /* 6. z-index */
+    .z-container { position: relative; height: 100px; }
+    .z-box {
+      width: 100px; height: 100px; position: absolute; opacity: 0.8;
+    }
+    .z1 { background: red; left: 30px; top: 0; z-index: 1; }
+    .z2 { background: blue; left: 60px; top: 20px; z-index: 2; }
+
+    /* 7. box-sizing demo */
+    .borderbox {
+      width: 200px;
+      padding: 20px;
+      border: 5px solid green;
+      box-sizing: border-box;
+      background: lightgreen;
+    }
+
+    /* 8. Pseudo-classes */
+    a:hover { color: red; }
+    input:focus { border: 2px solid rgb(255, 22, 14); }
+    p:first-child { font-weight: bold; }
+
+    /* 9. Flexbox wrapping */
+    .wrap-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      /* box-sizing: border-box; */
+      border: 2px solid gray;
+      padding: 10px;
+      max-width: 90px;
+    }
+    .wrap-item {
+      flex:10px;
+      height: 50px;
+      background: lightcoral;
+      text-align: center;
+      line-height: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Day 2 – CSS Basics Demo</h1>
+
+  <!-- 1. Class vs ID -->
+  <h2>1. Class vs ID Selectors</h2>
+  <p class="class-demo">This is styled with a Class (green)</p>
+  <p id="id-demo">This is styled with an ID (blue)</p>
+
+  <!-- 2. Specificity -->
+  <h2>2. Specificity</h2>
+  <p>This is gray (element selector)</p>
+  <p class="highlight">This is orange (class)</p>
+  <p id="specific" class="highlight">This is red (ID wins)</p>
+
+  <!-- 3. Box Model -->
+  <h2>3. CSS Box Model</h2>
+  <div class="box">Content + Padding + Border + Margin</div>
+
+  <!-- 4. Flexbox Centering -->
+  <h2>4. Centering a div with Flexbox</h2>
+  <div class="flex-parent">
+    <div class="flex-child">Centered</div>
+  </div>
+
+  <!-- 5. Visibility vs Display -->
+  <h2>5. Visibility vs Display</h2>
+  <p class="hidden">This is hidden (takes space)</p>
+  <p class="none">This is display none (no space)</p>
+  <p>This text is visible</p>
+
+  <!-- 6. z-index -->
+  <h2>6. z-index Example</h2>
+  <div class="z-container">
+    <div class="z-box z1">z=1</div>
+    <div class="z-box z2">z=2</div>
+  </div>
+
+  <!-- 7. box-sizing: border-box -->
+  <h2>7. box-sizing: border-box</h2>
+  <div class="borderbox">This box stays 200px wide including padding & border</div>
+
+  <!-- 8. Pseudo-classes -->
+  <h2>8. Pseudo-classes</h2>
+  <a href="#">Hover over this link</a><br><br>
+  <input type="text" placeholder="Click me (focus)"><br><br>
+  <div>
+    <p>First child (bold)</p>
+    <p>Second child</p>
+  </div>
+
+  <!-- 9. Flexbox Wrapping -->
+  <h2>9. Flexbox Wrapping</h2>
+  <div class="wrap-container">
+    <div class="wrap-item">1</div>
+    <div class="wrap-item">2</div>
+    <div class="wrap-item">3</div>
+    <div class="wrap-item">4</div>
+    <div class="wrap-item">5</div>
+    <div class="wrap-item">5</div>
+  </div>
+
+</body>
+</html>

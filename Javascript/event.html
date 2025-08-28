@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="box" placeholder="Type something">
+
+<script>
+  let box = document.getElementById("box");
+
+  box.addEventListener("change", (event) => {
+    console.log("Change",event.target.value);
+  });
+
+  box.addEventListener("input", (event) => {
+    console.log("Input:", event.target.value);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form id="myForm">
+  <input type="text" id="name" placeholder="Enter name">
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  let form = document.getElementById("myForm");
+  let nameInput = document.getElementById("name");
+
+  // Submit event
+  form.addEventListener("submit", (e) => {
+    e.preventDefault(); // stop page reload
+    alert("Form submitted with name: " + nameInput.value);
+  });
+
+  // Change event
+  nameInput.addEventListener("change", () => {
+    console.log("Changed to:", nameInput.value);
+  });
+
+  // Input event
+  nameInput.addEventListener("input", () => {
+    console.log("Typing:", nameInput.value);
+  });
+</script>
+
+</body>
+</html>

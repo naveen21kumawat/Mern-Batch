@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .high{
+      width: 200px;
+      height: 200px;
+      background-color: yellow;
+    }
+    #low{
+      width: 200px;
+      height: 200px;
+      border: 2px solid black;
+      /* background-color: blue; */
+    }
+    .button{
+      background-color: blue;
+    }
+  </style>
+</head>
+<body>
+   <p id="low" class="new">
+BOX
+     
+  </p>
+  <button class="button" onclick=toggleC()>Click me</button>
+
+   <script>
+    let b = document.getElementById('low');
+    // b.classList.add('high');
+    // b.classList.remove('new');
+
+    function toggleC(){
+      b.classList.toggle('high');
+    }
+    
+
+
+   </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .highlight{
+      border: 2px solid green;
+      padding: 10px;
+      width: 200px;
+      height: 200px;
+      border-radius: 250px 250px 50px 50px ;
+      background-color: yellow;
+      color: red;
+
+    }
+
+    #tog{
+       border: 2px solid green;
+      padding: 10px;
+      width: 200px;
+      height: 200px;
+      border-radius: 250px 250px 50px 50px ;
+    
+    }
+  </style>
+</head>
+<body>
+  <p id="demo">Hi</p>
+  <p id="demo3">hi i am
+     here</p>
+  <p id="demo1">Hi</p>
+  <img id="myImg" src="old.jpg">
+
+
+  <p id="tog"  onclick={toggleHighlight()}>Hello</p>
+
+
+<script>
+  document.getElementById("demo1").textContent = "<b>Hello World</b>";
+  document.getElementById("demo").innerHTML = "<b>Hello World</b>";
+
+  let li = document.createElement('li')
+  li.textContent = "Text Content"
+  let ul = document.querySelector('#demo')
+  ul.appendChild(li)
+
+  let re = document.getElementById('demo3')
+  re.remove()
+
+  document.getElementById("myImg").setAttribute("src", "new.jpg");
+
+  function toggleHighlight() {
+    let p = document.getElementById("tog");
+    p.classList.toggle("highlight");
+  }
+
+
+
+
+  let p = document.getElementById("tog");
+  p.classList.add("highlight");   // add class
+  // p.classList.remove("highlight"); // remove class
+  // p.classList.toggle("highlight"); // toggle on/off
+</script>
+
+</body>
+</html>
