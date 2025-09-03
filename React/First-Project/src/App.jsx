@@ -31,13 +31,14 @@ function App() {
   return (
     <>
      
-    <Header/>
-      <Routes>
+    {/* <Header/> */}
+      {/* <Routes>
         <Route path='/home' element={<Home/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/taskmanager' element={<TaskManager/>}/>
-         {/* <Route path='/contact' element={<Contact/>}/> */}
-      </Routes>
+      </Routes> */}
+
+      <Header/>
     
     </>
   )
