@@ -7,11 +7,10 @@ import Card from "./components/Card"
 import { useState } from "react"
 
 
-
 function App() {
  
 
-const [cardData,setCardData]= useState( [
+const [cardData,setCardData]=useState( [
     {
       id: 1,
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
@@ -51,6 +50,7 @@ const [cardData,setCardData]= useState( [
 
 
 // let name =  'Naveen'
+
 
   return (<>
     <Header/>
