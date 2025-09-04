@@ -18,7 +18,7 @@ function App() {
     alert("I am A Function");
   }
 
-  useEffect;
+  
 
   useEffect(() => {
     alert("Color");
