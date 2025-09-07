@@ -10,7 +10,8 @@ function Navbar() {
       <Link to='/' className="px-4 py-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-md transition-all duration-200 font-medium">Home</Link>
       <Link to='/about' className="px-4 py-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-md transition-all duration-200 font-medium">About</Link>
       <Link to='/users' className="px-4 py-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-md transition-all duration-200 font-medium">Users</Link>
-      <Link to='/tasks' className="px-4 py-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-md transition-all duration-200 font-medium">Tasks</Link>
+  <Link to='/tasks' className="px-4 py-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-md transition-all duration-200 font-medium">Tasks</Link>
+  <Link to='/useref-usememo-demo' className="px-4 py-2 text-green-600 hover:text-green-800 hover:bg-green-50 rounded-md transition-all duration-200 font-medium">useRef/useMemo Demo</Link>
     </div>
   )
 }

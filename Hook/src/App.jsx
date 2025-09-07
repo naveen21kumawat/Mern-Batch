@@ -9,6 +9,7 @@ import UserList from "./components/UserList";
 import UserDetails from "./components/UserDetails";
 import NotFound from "./components/NotFound";
 import TaskManager from "./components/TaskManager";
+import UseRefUseMemoDemo from "./components/UseRefUseMemoDemo";
 
 function App() {
 
@@ -37,6 +38,8 @@ function App() {
       <Route path="/users" element={<UserList />}></Route>
       <Route path="/users/:id" element={<UserDetails />}></Route>
       <Route path="/tasks" element={<TaskManager />}></Route>
+      {/* New route for useRef/useMemo demo */}
+      <Route path="/useref-usememo-demo" element={<UseRefUseMemoDemo />}></Route>
       <Route path="*" element={<NotFound />}></Route>
     </Routes>
       {/* <Home  /> */}
