@@ -1,9 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { AppContext } from "../Context/AppContext";
+import { useContext } from 'react';
 
 
 function UserDetails() {
+    const {theme} = useContext(AppContext);
+    console.log(theme);
   const [data, setdata] = useState(null);
   const { id } = useParams();
 
@@ -21,6 +25,7 @@ function UserDetails() {
   return (
     <div className="flex justify-center mt-10">
       <div className="card w-96 bg-white shadow-lg rounded-lg p-6 border-2">
+        <h2 className="text-xl font-bold mb-2 text-center text-blue-700">{theme}</h2>
         <h2 className="text-xl font-bold mb-2 text-center text-blue-700">{data.name}</h2>
         <p className="text-gray-700 mb-1"><span className="font-semibold">Username:</span> {data.username}</p>
         <p className="text-gray-700 mb-1"><span className="font-semibold">Email:</span> {data.email}</p>
