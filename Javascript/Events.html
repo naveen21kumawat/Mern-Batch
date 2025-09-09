@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .bulb {
+        width: 200px;
+        height: 400px;
+       border: 2px solid purple;
+       border-radius:50% 50% 20% 20% ;
+      }
+      .active{
+        width: 200px;
+        height: 400px;
+       border: 2px solid purple;
+       border-radius:50% 50% 20% 20% ;
+       background-color: cyan;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="bulb ">bulb</p>
+    <button type="button" onclick="togle()" class="btn btn-primary">
+    Click Me
+  </button>
+
+
+  <script>
+    let box = document.body.getElementsByClassName("bulb")[0];
+  console.log(box.textContent)
+    function togle() {
+      box.classList.toggle("active");
+    }
+  </script>
+  </body>
+</html>
