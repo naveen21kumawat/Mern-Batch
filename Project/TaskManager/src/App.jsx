@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Todo from './components/Todo'
 import Home from './components/Home'
 import About from './components/About'
+import Login from './components/Login'
 import AppContext from './Context/AppContext'
 
 function App() {
@@ -14,10 +15,10 @@ function App() {
     <Navbar/>
     <Routes>
       <Route  path="/" element={<Home />} />
-      {/* <Route  path="/" element={<About />} /> */}
       <Route  path="/about" element={<About />} />
       <Route  path="/todo" element={<Todo />} />
-
+      <Route  path="/login" element={<Login />} />
+      <Route  path="/register" element={<Login />} />
       </Routes>
     </AppContext>
 
