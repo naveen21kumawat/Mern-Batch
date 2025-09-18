@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 export const UserContext = createContext()
@@ -8,26 +8,36 @@ export const useAuth = () => {
 }
 
 
-function AppContext({children}) {
+function AppContext({ children }) {
   const [name, setName] = useState("")
-  const [data,setData] = useState([])
-  const [todo,setTodo] = useState([])
+  const [data, setData] = useState([])
+  const [todo, setTodo] = useState([])
 
   const sendData = async (userData) => {
     try {
-      let user = await axios.post('/api/sendData',userData)
+      let user = await axios.post('/api/sendData', userData)
       console.log(user.data)
       setData(user.data)
     } catch (error) {
       console.error("Error sending data:", error)
     }
   }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let data = await axios.get('http://localhost:3000/todo')
+      setTodo(data.data)
+    }
+    fetchData()
+  }, [data])
+
+  
   return (
 
 
-    <UserContext.Provider value={{todo,setTodo,data,setData,sendData,name,setName}}>
+    <UserContext.Provider value={{ todo, setTodo, data, setData, sendData, name, setName }}>
 
-    {children}
+      {children}
     </UserContext.Provider>
   )
 }

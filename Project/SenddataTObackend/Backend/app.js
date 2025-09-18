@@ -1,0 +1,48 @@
+import express, { urlencoded } from "express";
+import cors from 'cors'
+
+const app = express();
+app.use(express.json())
+app.use(express.urlencoded({extended : true}))
+app.use(cors())
+
+app.get('/',(req,res)=>{
+    res.send("Server is Running")
+})
+
+
+
+app.post('/api/register',async(req,res)=>{
+    console.log(req.body.name)
+    console.log("En",req.body)
+
+
+
+    if (req.body.password !== req.body.confirmPassword) {
+        console.log("Password Not Match")
+         return res.status(500).send('Password Not Match')
+        }
+
+    
+})
+
+
+// Register route
+// app.post('/api/register', (req, res) => {
+//     console.log('Register request received:', req.body);
+//     const { name, email, password } = req.body;
+    
+ 
+//     res.status(201).json({
+//         success: true,
+//         message: 'User registered successfully',
+//         data: {
+//             name,
+//             email
+//         }
+//     });
+// });
+
+app.listen(3000, () => {
+    console.log("Server is running on port 3000");
+});

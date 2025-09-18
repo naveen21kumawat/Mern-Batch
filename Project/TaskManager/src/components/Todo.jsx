@@ -39,7 +39,7 @@ function Todo() {
         {
 
           todo.map((t)=>(
-            <div className="border-2 bg-gray-200 rounded-4xl text-center p-2 ml-10 mr-10 font-bold  text-2xl flex flex-row  justify-around items-center" key={Date.now()} >
+            <div className="border-2 bg-gray-200 rounded-4xl text-center p-2 ml-10 mr-10 font-bold  text-2xl flex flex-row  justify-around items-center" key={t} >
               <div className="">{t}</div>
 
               <button type='button 'className='border-1 text-sm  border-red p-2 rounded-2xl bg-red-200' onClick={()=>handleDelete(t)}>X</button>

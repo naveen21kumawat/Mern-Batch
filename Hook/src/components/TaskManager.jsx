@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import './TaskManager.css';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 const TaskManager = () => {
   const [taskInput, setTaskInput] = useState('');
@@ -34,6 +36,7 @@ const TaskManager = () => {
 
   const completedCount = tasks.filter(task => task.completed).length;
   const totalCount = tasks.length;
+ 
 
   return (
     <div className="task-manager-container">
