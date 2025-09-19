@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { userContext } from '../Context/ContextProvide'
 
 function Login() {
+
+
+  const {login} = useContext(userContext)
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -13,9 +17,9 @@ function Login() {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
-    console.log('Login form submitted:', formData)
+  const res =await login(formData)
     // Add login logic here
   }
 

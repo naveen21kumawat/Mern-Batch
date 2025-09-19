@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './components/Home'
 import Login from './components/Login'
 import Register from './components/Register'
 import Navbar from './components/Navbar'
+import ContextProvide from './Context/ContextProvide'
+import { userContext } from './Context/ContextProvide'
 
 function App() {
+
   return (
+    <ContextProvide>
+
     <Router>
       <div className="min-h-screen bg-gray-50">
         <Navbar />
@@ -19,6 +24,7 @@ function App() {
         </main>
       </div>
     </Router>
+    </ContextProvide>
   )
 }
 

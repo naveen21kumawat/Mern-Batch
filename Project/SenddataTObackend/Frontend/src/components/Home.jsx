@@ -1,6 +1,14 @@
-import React from 'react'
-
+import React, { useContext } from 'react'
+import { userContext } from '../Context/ContextProvide'
 function Home() {
+
+
+  const {name,login}= useContext(userContext)
+  login()
+
+  console.log(name)
+
+  
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
