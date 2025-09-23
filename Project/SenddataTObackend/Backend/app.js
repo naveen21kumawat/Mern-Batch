@@ -23,8 +23,12 @@ app.post('/api/register',async(req,res)=>{
          return res.status(500).send('Password Not Match')
         }
 
+    return res.status(201).send(req.body)
+
     
 })
+
+
 
 
 // Register route
@@ -42,6 +46,22 @@ app.post('/api/register',async(req,res)=>{
 //         }
 //     });
 // });
+
+app.get('/api/userData',(req,res)=>{
+    res.json([
+        {
+            name : "Dheeraj",
+            email : "dheeraj@gmail.com",
+            password : "1234"
+        },
+        {
+            name : "Naveen",
+            email : "naveen@gmail.com",
+            password : "1234"
+        },
+        
+    ])
+})
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000");

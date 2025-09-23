@@ -6,6 +6,7 @@ import Register from './components/Register'
 import Navbar from './components/Navbar'
 import ContextProvide from './Context/ContextProvide'
 import { userContext } from './Context/ContextProvide'
+import Profile from './components/Profile'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </main>
       </div>

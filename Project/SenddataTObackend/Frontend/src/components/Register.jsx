@@ -41,9 +41,6 @@ function Register() {
       }
 
       
-
-
-      
       // Reset form
       setFormData({
         name: '',
