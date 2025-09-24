@@ -5,7 +5,6 @@ const http = require('http');
 
 
 
-
 // Read file asynchronously with callback
 // let data =fs.readFileSync('exampl.txt', 'utf8')
 // console.log(data)

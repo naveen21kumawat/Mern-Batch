@@ -1,32 +1,40 @@
 import express, { urlencoded } from "express";
 import cors from 'cors'
+import connectDB from './config/database.js'
+import userModel from './models/user.js'
+import authRotes from './routes/user.js'
 
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended : true}))
 app.use(cors())
+connectDB()
 
 app.get('/',(req,res)=>{
     res.send("Server is Running")
 })
 
 
-
-app.post('/api/register',async(req,res)=>{
-    console.log(req.body.name)
-    console.log("En",req.body)
+app.use('/api/auth',authRotes)
 
 
 
-    if (req.body.password !== req.body.confirmPassword) {
-        console.log("Password Not Match")
-         return res.status(500).send('Password Not Match')
-        }
 
-    return res.status(201).send(req.body)
+// app.post('/api/register',async(req,res)=>{
+//     console.log(req.body.name)
+//     console.log("En",req.body)
+
+
+
+//     if (req.body.password !== req.body.confirmPassword) {
+//         console.log("Password Not Match")
+//          return res.status(500).send('Password Not Match')
+//         }
+
+//     return res.status(201).send(req.body)
 
     
-})
+// })
 
 
 

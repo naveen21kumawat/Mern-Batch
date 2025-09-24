@@ -30,7 +30,7 @@ function Register() {
 
     setLoading(false)
     try {
-      const response = await axios.post('/api/register', formData)
+      const response = await axios.post('/api/auth/register', formData)
 
       if(response.status === 201){
         console.log('Registration successful:', response.data)
