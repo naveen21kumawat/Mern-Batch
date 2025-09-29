@@ -5,7 +5,6 @@ import Login from './components/Login'
 import Register from './components/Register'
 import Navbar from './components/Navbar'
 import ContextProvide from './Context/ContextProvide'
-import { userContext } from './Context/ContextProvide'
 import Profile from './components/Profile'
 
 function App() {

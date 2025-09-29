@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import { useContext } from 'react'
+import { userContext } from '../Context/ContextProvide'
 function Navbar() {
+  const { isAuthenticated ,logout} = useContext(userContext);
+  console.log(isAuthenticated)
   return (
     <nav className="bg-slate-800 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,7 +31,11 @@ function Navbar() {
               >
                 Profile
               </Link>
-              <Link 
+
+              {
+                !isAuthenticated &&(
+                  <>
+                  <Link 
                 to="/login" 
                 className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
               >
@@ -40,6 +47,22 @@ function Navbar() {
               >
                 Register
               </Link>
+                  </>
+                )
+              }
+
+              {
+                isAuthenticated &&(
+                  <Link 
+                to="/login" 
+                onClick={()=>logout()}
+                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              >
+                Logout
+              </Link>
+                )
+              }
+            
             </div>
           </div>
           

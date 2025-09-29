@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { useContext } from 'react'
+import { userContext } from '../Context/ContextProvide'
 
 function Register() {
+
+  const { register } = useContext(userContext)
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,35 +27,27 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setMessage('')
+
+    if (formData.password !== formData.confirmPassword) {
+      setMessage('Passwords do not match!')
+      return
+    }
     
-    // if (formData.password !== formData.confirmPassword) {
-    //   setMessage('Passwords do not match!')
-    //   return
-    // }
-
-    setLoading(false)
+    setLoading(true)
     try {
-      const response = await axios.post('/api/auth/register', formData)
-
-      if(response.status === 201){
-        console.log('Registration successful:', response.data)
-        setMessage('Registration successful!')
-      }else{
-        console.log('Registration failed:', response.data)
-        setMessage('Registration failed. Please try again.')
-      }
-
+      const response = await register(formData)
+      setMessage(response.message || 'Registration successful!')
       
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
-      })
+      // Clear form on success
+      // setFormData({
+      //   name: '',
+      //   email: '',
+      //   password: '',
+      //   confirmPassword: ''
+      // })
     } catch (error) {
-      console.error('Registration error:', error)
-      setMessage(error.response?.data?.message || 'Registration failed. Please try again.')
+      const errorMessage = error.response?.data?.message || 'Registration failed. Please try again.'
+      setMessage(errorMessage)
     } finally {
       setLoading(false)
     }
@@ -67,14 +64,14 @@ function Register() {
             Join us today! Please fill in your information.
           </p>
         </div>
-        
+
         {/* Message Display */}
         {message && (
           <div className={`p-4 rounded-md ${message.includes('successful') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
             {message}
           </div>
         )}
-        
+
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <div className="space-y-4">
             <div>
@@ -92,7 +89,7 @@ function Register() {
                 placeholder="Enter your full name"
               />
             </div>
-            
+
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email Address
@@ -108,7 +105,7 @@ function Register() {
                 placeholder="Enter your email"
               />
             </div>
-            
+
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
@@ -124,7 +121,7 @@ function Register() {
                 placeholder="Create a password"
               />
             </div>
-            
+
             <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
                 Confirm Password
@@ -162,16 +159,15 @@ function Register() {
             <button
               type="submit"
               disabled={loading}
-              className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white transition-colors ${
-                loading 
-                  ? 'bg-blue-400 cursor-not-allowed' 
-                  : 'bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
-              }`}
+              className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white transition-colors ${loading
+                ? 'bg-blue-400 cursor-not-allowed'
+                : 'bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+                }`}
             >
               {loading ? 'Creating Account...' : 'Create Account'}
             </button>
           </div>
-          
+
           <div className="text-center">
             <span className="text-sm text-gray-600">
               Already have an account?{' '}
