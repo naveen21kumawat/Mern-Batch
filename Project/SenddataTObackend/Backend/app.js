@@ -16,10 +16,6 @@ app.get('/',(req,res)=>{
 
 
 app.use('/api/auth',authRotes)
-
-
-
-
 // app.post('/api/register',async(req,res)=>{
 //     console.log(req.body.name)
 //     console.log("En",req.body)
