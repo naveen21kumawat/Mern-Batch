@@ -7,7 +7,7 @@ export const userContext = createContext();
 function ContextProvide({ children }) {
     const [name, setName] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [token, setToken] = useState(localStorage.getItem(''));
+    const [token, setToken] = useState('');
     const [user, setUser] = useState([]);
     console.log("User", user);
     // console.log("Token", token);
@@ -19,12 +19,28 @@ function ContextProvide({ children }) {
         localStorage.removeItem("user");
         setIsAuthenticated(false);
         setToken(null);
-        setUser([]);
+        setUser('');
     }
     
     const login = (data) => {
         console.log("Login ", data);
     }
+
+
+    useEffect(()=>{
+      const token = localStorage.getItem("token")
+      const user = localStorage.getItem("user")
+
+      if(user && token){
+        setUser(JSON.parse(user))
+        setToken(token)
+        setIsAuthenticated(true)
+      }else{
+        setUser('')
+        setToken('')
+        setIsAuthenticated(false)
+      }
+    },[])
 
 
 

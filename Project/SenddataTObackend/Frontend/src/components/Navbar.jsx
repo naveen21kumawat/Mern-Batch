@@ -32,8 +32,11 @@ function Navbar() {
                 Profile
               </Link>
 
-              {
-                !isAuthenticated &&(
+             
+             {
+              !isAuthenticated && (
+                
+             
                   <>
                   <Link 
                 to="/login" 
@@ -48,7 +51,7 @@ function Navbar() {
                 Register
               </Link>
                   </>
-                )
+               )
               }
 
               {
