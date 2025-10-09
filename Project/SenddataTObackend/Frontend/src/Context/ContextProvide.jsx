@@ -9,6 +9,7 @@ function ContextProvide({ children }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [token, setToken] = useState(localStorage.getItem(''));
     const [user, setUser] = useState([]);
+    console.log("User", user);
     // console.log("Token", token);
     // console.log("User", user);
 
@@ -27,33 +28,34 @@ function ContextProvide({ children }) {
 
 
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        // console.log("Token", token)
-        const user = localStorage.getItem("user");
-        // console.log("User", user)
-        if (token && user) {
-            // console.log("User", user);
-            setUser(JSON.parse(user));
-            setToken(token);
-            setIsAuthenticated(true);
-        }else{
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
-            setIsAuthenticated(false);
-        }
-    }, []);
+    // useEffect(() => {
+    //     const token = localStorage.getItem("token");
+    //     // console.log("Token", token)
+    //     const user = localStorage.getItem("user");
+    //     // console.log("User", user)
+    //     if (token && user) {
+    //         // console.log("User", user);
+    //         setUser(JSON.parse(user));
+    //         setToken(token);
+    //         setIsAuthenticated(true);
+    //     }else{
+    //         localStorage.removeItem("token");
+    //         localStorage.removeItem("user");
+    //         setIsAuthenticated(false);
+    //     }
+    // }, []);
 
     const register = async (data) => {
         try {
             const res = await axios.post("/api/auth/register", data);
-            console.log("Register", res.data);
-            setToken(res.data.token);
-            localStorage.setItem("token", res.data.token);
-            setIsAuthenticated(true);
-            setUser(res.data.user);
-            localStorage.setItem("user", JSON.stringify(res.data.user));
+            console.log("Register", res);
+            
+            localStorage.setItem("token",res.data.token)
+            localStorage.setItem("user",JSON.stringify(res.data.user))
 
+            setIsAuthenticated(true)
+            setToken(res.data.token)
+            setUser(res.data.user)
             return res.data;
         } catch (error) {
             console.error("Registration error:", error);
