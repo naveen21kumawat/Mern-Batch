@@ -1,11 +1,9 @@
 import express from 'express'
-import  getAllUsers  from "../controllers/userControllers.js";
+import { getAllUsers } from '../controllers/userControllers.js'
 const userRoutes = express.Router();
 
 
-userRoutes.get('/getAllUsers',getAllUsers)
-
-// userRoutes.get('/getUserById/:id',getUserById)
+userRoutes.get('/allusers',getAllUsers)
 
 
 

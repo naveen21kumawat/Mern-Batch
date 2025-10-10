@@ -4,7 +4,7 @@ import { userContext } from '../Context/ContextProvide'
 function Login() {
 
 
-  const {login} = useContext(userContext)
+  const { login ,setIsAuthenticated,setToken,setUser} = useContext(userContext)
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -17,10 +17,23 @@ function Login() {
     })
   }
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-  const res =await login(formData)
+    const res = await login(formData)
+    
     // Add login logic here
+    if (res.status === 200) {
+      localStorage.setItem("token", res.data.token)
+      console.log("string user", JSON.stringify(res.data.user))
+      localStorage.setItem("user", JSON.stringify(res.data.user))
+
+      setIsAuthenticated(true)
+      setToken(res.data.token)
+      console.log("token",res.data.token)
+      setUser(res.data.user)
+      console.log("user",res.data.user)
+    }
+    console.log(res)
   }
 
   return (
@@ -33,7 +46,7 @@ function Login() {
           <p className="mt-2 text-center text-sm text-gray-600">
             Welcome back! Please enter your details.
           </p>
-          
+
         </div>
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <div className="rounded-md shadow-sm -space-y-px">
@@ -82,7 +95,7 @@ function Login() {
               </label>
             </div> */}
 
-            {/* <div className="text-sm">
+          {/* <div className="text-sm">
               <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
                 Forgot your password?
               </a>

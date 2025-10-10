@@ -8,7 +8,9 @@ function ContextProvide({ children }) {
     const [name, setName] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [token, setToken] = useState('');
-    const [user, setUser] = useState([]);
+    console.log("Token", token);
+    const [user, setUser] = useState('');
+    const [allusers, setAllusers] = useState([])
     console.log("User", user);
     // console.log("Token", token);
     // console.log("User", user);
@@ -21,26 +23,41 @@ function ContextProvide({ children }) {
         setToken(null);
         setUser('');
     }
-    
-    const login = (data) => {
-        console.log("Login ", data);
-    }
 
 
-    useEffect(()=>{
-      const token = localStorage.getItem("token")
-      const user = localStorage.getItem("user")
 
-      if(user && token){
-        setUser(JSON.parse(user))
-        setToken(token)
-        setIsAuthenticated(true)
-      }else{
-        setUser('')
-        setToken('')
-        setIsAuthenticated(false)
-      }
-    },[])
+    useEffect(() => {
+        const getAllUsers = async () => {
+            try {
+                const res = await axios.get("/api/user/allusers")
+                console.log("All Users", res)
+                setAllusers(res.data.users)
+                return res.data
+            } catch (error) {
+                console.error("All Users error:", error)
+                throw error
+            }
+        }
+        getAllUsers()
+    }, [])
+
+
+
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        const user = localStorage.getItem("user")
+        console.log("User", user);
+
+        if (user && token) {
+            setUser(JSON.parse(user))
+            setToken(token)
+            setIsAuthenticated(true)
+        } else {
+            setUser('')
+            setToken('')
+            setIsAuthenticated(false)
+        }
+    }, [])
 
 
 
@@ -65,9 +82,9 @@ function ContextProvide({ children }) {
         try {
             const res = await axios.post("/api/auth/register", data);
             console.log("Register", res);
-            
-            localStorage.setItem("token",res.data.token)
-            localStorage.setItem("user",JSON.stringify(res.data.user))
+
+            localStorage.setItem("token", res.data.token)
+            localStorage.setItem("user", JSON.stringify(res.data.user))
 
             setIsAuthenticated(true)
             setToken(res.data.token)
@@ -78,9 +95,21 @@ function ContextProvide({ children }) {
             throw error;
         }
     }
+    const login = async (data) => {
+        try {
+            const res = await axios.post("/api/auth/login", data)
+            console.log("Login", res)
+
+            return res
+        } catch (error) {
+            console.error("Login error:", error);
+            throw error;
+        }
+    }
+
 
     return (
-        <userContext.Provider value={{ login, name, setName, user, register,isAuthenticated,logout }}>
+        <userContext.Provider value={{setAllusers,allusers, login, name, setName, user, register, isAuthenticated, logout, setIsAuthenticated }}>
             {children}
         </userContext.Provider>
     );

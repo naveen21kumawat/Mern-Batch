@@ -17,6 +17,7 @@ app.get('/',(req,res)=>{
 app.use('/api/auth',authRoutes)
 app.use('/api/user',userRoutes)
 
+
 app.listen(3002, ()=>{
     console.log("server is runnng of 3002")
 })

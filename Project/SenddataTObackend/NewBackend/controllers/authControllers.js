@@ -42,7 +42,35 @@ export const register = async(req,res)  =>{
 }
 
 
-export const  login = () =>{
-  
+export const  login = async(req,res) =>{
+  try {
+     const user = await userModel.findOne({email :req.body.email})
+     console.log("Exist User",user)
+     if(!user){
+      return res.status(404).json({
+        message : "User Not Found"
+      })
+     }
+     const isMatch =await bcrypt.compare(req.body.password,user.password)
+     if(!isMatch){
+      return res.status(401).json({
+        message : "Password Not Match"
+      })
+     }
+
+     const token = jwt.sign({id : user._id},"DSD!@#hj")
+     console.log(token)
+     res.status(200).json({
+       message : "User Login Successfully",
+       user,
+       token
+     })
+
+  } catch (error) {
+    return res.status(501).json({
+      message : "Internal Server Error"
+    })
+  }
+
 
 }

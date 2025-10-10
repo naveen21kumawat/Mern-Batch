@@ -7,4 +7,5 @@ authRoutes.post('/register',register)
 authRoutes.post('/login',login)
 
 
+
 export default authRoutes
