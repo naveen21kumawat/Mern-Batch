@@ -7,7 +7,7 @@ export const register = async(req,res)  =>{
   console.log(req.body)
   const {name,email,password} = req.body
 
-  const ExistUser = await userModel.findOne({email :email})
+  const ExistUser = await userModel.findOne({email :email}).select("-password")
   console.log("Exist User",ExistUser)
   if(ExistUser){
     return res.status(200).json({

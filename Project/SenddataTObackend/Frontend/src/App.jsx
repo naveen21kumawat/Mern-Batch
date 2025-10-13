@@ -4,11 +4,14 @@ import Home from './components/Home'
 import Login from './components/Login'
 import Register from './components/Register'
 import Navbar from './components/Navbar'
-import ContextProvide from './Context/ContextProvide'
+import ContextProvide, { userContext } from './Context/ContextProvide'
 import Profile from './components/Profile'
 import AllUsers from './components/AllUsers'
-
+import { Navigate } from 'react-router-dom'
+import UserDashboard from './components/UserDashboard'
+import AdminDashboard from './components/AdminDashboard'
 function App() {
+  // const {isAuthenticated} = useContext(userContext)
 
   return (
     <ContextProvide>
@@ -21,8 +24,15 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/allusers" element={<AllUsers />} />
+
+            <Route path="/userdashboard" element={<UserDashboard />} />
+            <Route path="/admindashboard" element={<AdminDashboard />} />
+          
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/allusers" element={<AllUsers />} />
+           
+
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </main>
       </div>

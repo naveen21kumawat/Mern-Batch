@@ -11,6 +11,7 @@ function ContextProvide({ children }) {
     console.log("Token", token);
     const [user, setUser] = useState('');
     const [allusers, setAllusers] = useState([])
+    const [loading,setLoading] = useState(false)
     console.log("User", user);
     // console.log("Token", token);
     // console.log("User", user);
@@ -29,9 +30,11 @@ function ContextProvide({ children }) {
     useEffect(() => {
         const getAllUsers = async () => {
             try {
+                setLoading(true)
                 const res = await axios.get("/api/user/allusers")
                 console.log("All Users", res)
                 setAllusers(res.data.users)
+                setLoading(false)
                 return res.data
             } catch (error) {
                 console.error("All Users error:", error)
@@ -109,7 +112,7 @@ function ContextProvide({ children }) {
 
 
     return (
-        <userContext.Provider value={{setAllusers,allusers, login, name, setName, user, register, isAuthenticated, logout, setIsAuthenticated }}>
+        <userContext.Provider value={{setAllusers,allusers,loading,setLoading, login, name, setName, user, setUser, token, setToken, register, isAuthenticated, logout, setIsAuthenticated }}>
             {children}
         </userContext.Provider>
     );

@@ -10,7 +10,7 @@ function Home() {
 
   
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-r from-purple-300 via-blue-100 to-indigo-400 flex items-center justify-center">
       <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-lg shadow-xl p-8 md:p-12">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">

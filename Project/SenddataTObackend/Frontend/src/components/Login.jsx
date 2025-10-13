@@ -1,14 +1,17 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { userContext } from '../Context/ContextProvide'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
+  const navigate = useNavigate()
 
-
-  const { login ,setIsAuthenticated,setToken,setUser} = useContext(userContext)
+  const { login, setIsAuthenticated, setToken, setUser, isAuthenticated } = useContext(userContext)
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleChange = (e) => {
     setFormData({
@@ -19,21 +22,31 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const res = await login(formData)
+    setLoading(true)
+    setError('')
     
-    // Add login logic here
-    if (res.status === 200) {
-      localStorage.setItem("token", res.data.token)
-      console.log("string user", JSON.stringify(res.data.user))
-      localStorage.setItem("user", JSON.stringify(res.data.user))
+    try {
+      const res = await login(formData)
+      
+      if (res.status === 200) {
+        localStorage.setItem("token", res.data.token)
+        localStorage.setItem("user", JSON.stringify(res.data.user))
 
-      setIsAuthenticated(true)
-      setToken(res.data.token)
-      console.log("token",res.data.token)
-      setUser(res.data.user)
-      console.log("user",res.data.user)
+        setIsAuthenticated(true)
+        setToken(res.data.token)
+        setUser(res.data.user)
+        
+        // Redirect to profile page after successful login
+        navigate("/profile")
+      } else {
+        setError(res.data.message || 'Login failed')
+      }
+    } catch (error) {
+      console.error('Login error:', error)
+      setError('Login failed. Please try again.')
+    } finally {
+      setLoading(false)
     }
-    console.log(res)
   }
 
   return (
@@ -49,6 +62,11 @@ function Login() {
 
         </div>
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+          {error && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+              {error}
+            </div>
+          )}
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email" className="sr-only">
@@ -105,9 +123,10 @@ function Login() {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+              disabled={loading}
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Sign in
+              {loading ? 'Signing in...' : 'Sign in'}
             </button>
           </div>
         </form>
