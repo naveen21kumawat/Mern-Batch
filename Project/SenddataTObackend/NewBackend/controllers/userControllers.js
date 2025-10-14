@@ -35,3 +35,21 @@ try {
     })
 }
 }
+
+
+export const updateUser = async(req,res) =>{
+    try {
+        console.log(req.params.id)
+        console.log(req.body)
+         const updateUser = await userModel.findByIdAndUpdate(req.params.id,req.body)
+         console.log("Updated User",updateUser)
+         return res.status(200).json({
+            message : "User Updated",
+            updateUser
+         })
+    } catch (error) {
+        return res.status(500).json({
+            message : "Internal Server Error"
+        })
+    }
+}

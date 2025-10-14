@@ -12,7 +12,13 @@ function AdminDashboard() {
 
 
     const [showDeleteDialog, setShowDeleteDialog] = useState(false)
+    const [showUpdateDialog, setShowUpdateDialog] = useState(false)
     const [userToDelete, setUserToDelete] = useState(null)
+    const [userToUpdate, setUserToUpdate] = useState({
+        _id: '',
+        name: '',
+        email: ''
+    })
 
     useEffect(() => {
         setFilteredUsers(allusers.filter((user) => user.role === "user"))
@@ -35,14 +41,53 @@ function AdminDashboard() {
     const confirmDelete = async () => {
         if (userToDelete) {
             console.log("Delete User", userToDelete._id)
-            // const deletedUser = await axios.delete(`/api/user/deleteuser/${userToDelete._id}`)
-            // console.log("Deleted User", deletedUser)
+            const deletedUser = await axios.delete(`/api/user/deleteuser/${userToDelete._id}`)
+            console.log("Deleted User", deletedUser)
             setFilteredUsers(filteredUsers.filter((user) => user._id !== userToDelete._id))
             closeDeleteDialog()
         }
     }
 
-  
+    const openUpdateDialog = (user) => {
+        setUserToUpdate({
+            _id: user._id,
+            name: user.name,
+            email: user.email
+        })
+        setShowUpdateDialog(true)
+    }
+
+    const closeUpdateDialog = () => {
+        setShowUpdateDialog(false)
+        setUserToUpdate({ _id: '', name: '', email: '' })
+    }
+
+    const handleUpdateChange = (e) => {
+        const { name, value } = e.target
+        setUserToUpdate(prev => ({
+            ...prev,
+            [name]: value
+        }))
+    }
+
+    const handleUpdateSubmit = async (e) => {
+        e.preventDefault()
+        try {
+      
+            const response = await axios.put(`/api/user/updateuser/${userToUpdate._id}`, userToUpdate)
+            console.log('User updated:', response.data)
+            
+           
+            setFilteredUsers(filteredUsers.map(user => 
+                user._id === userToUpdate._id ? { ...user, ...userToUpdate } : user
+            ))
+            
+            closeUpdateDialog()
+        } catch (error) {
+            console.error('Error updating user:', error)
+            
+        }
+    }
 
 
     return (
@@ -93,7 +138,10 @@ function AdminDashboard() {
                                                 >
                                                     Delete
                                                 </button>
-                                                <button className='bg-green-600 hover:bg-green-700 text-white px-3 py-1 m-1 rounded-md transition-colors'>
+                                                <button 
+                                                    className='bg-green-600 hover:bg-green-700 text-white px-3 py-1 m-1 rounded-md transition-colors'
+                                                    onClick={() => openUpdateDialog(user)}
+                                                >
                                                     Update
                                                 </button>
                                             </td>
@@ -150,6 +198,73 @@ function AdminDashboard() {
                                 Delete User
                             </button>
                         </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Update User Dialog */}
+            {showUpdateDialog && (
+                <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
+                    <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
+                        <div className="flex items-center justify-between mb-4">
+                            <h3 className="text-lg font-medium text-gray-900">Update User</h3>
+                            <button 
+                                onClick={closeUpdateDialog}
+                                className="text-gray-400 hover:text-gray-500"
+                            >
+                                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <form onSubmit={handleUpdateSubmit}>
+                            <div className="mb-4">
+                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                                    Name
+                                </label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    value={userToUpdate.name}
+                                    onChange={handleUpdateChange}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    required
+                                />
+                            </div>
+                            
+                            <div className="mb-6">
+                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                                    Email
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value={userToUpdate.email}
+                                    onChange={handleUpdateChange}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    required
+                                />
+                            </div>
+
+                            <div className="flex justify-end space-x-3">
+                                <button
+                                    type="button"
+                                    onClick={closeUpdateDialog}
+                                    className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors"
+                                >
+                                    Update User
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             )}
