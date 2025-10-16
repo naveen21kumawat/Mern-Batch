@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken'
 
 export const register = async(req,res)  =>{
   console.log(req.body)
-  const {name,email,password} = req.body
+  const {name,email,password,role} = req.body
 
   const ExistUser = await userModel.findOne({email :email}).select("-password")
   console.log("Exist User",ExistUser)
@@ -26,7 +26,8 @@ export const register = async(req,res)  =>{
   const user  = await userModel.create({
     name : name,
     email :  email,
-    password : hash
+    password : hash,
+    role : role || "user" // Use provided role or default to "user"
   })
 
 

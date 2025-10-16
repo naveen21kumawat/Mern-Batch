@@ -8,11 +8,12 @@ function ContextProvide({ children }) {
     const [name, setName] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [token, setToken] = useState('');
-    console.log("Token", token);
+    // console.log("Token", token);
     const [user, setUser] = useState('');
     const [allusers, setAllusers] = useState([])
     const [loading,setLoading] = useState(false)
-    console.log("User", user);
+    const [ownerTurfs, setOwnerTurfs] = useState([])
+    // console.log("User", user);
     // console.log("Token", token);
     // console.log("User", user);
 
@@ -27,12 +28,13 @@ function ContextProvide({ children }) {
 
 
 
+
     useEffect(() => {
         const getAllUsers = async () => {
             try {
                 setLoading(true)
                 const res = await axios.get("/api/user/allusers")
-                console.log("All Users", res)
+                // console.log("All Users", res)
                 setAllusers(res.data.users)
                 setLoading(false)
                 return res.data
@@ -43,13 +45,14 @@ function ContextProvide({ children }) {
         }
         getAllUsers()
     }, [])
+    
 
 
 
     useEffect(() => {
         const token = localStorage.getItem("token")
         const user = localStorage.getItem("user")
-        console.log("User", user);
+        // console.log("User", user);
 
         if (user && token) {
             setUser(JSON.parse(user))
@@ -62,6 +65,25 @@ function ContextProvide({ children }) {
         }
     }, [])
 
+    
+    useEffect(() => { 
+        // fetch turfs by owner id
+        const getAllTurfs = async () => {
+            try {
+                console.log("Get All Turfs By Owner Id", user._id)
+                const response = await axios.get(`/api/turf/getAllTurfsByOwnerId/${user._id}`);
+                console.log("Turfs", response.data.turfs);
+                setOwnerTurfs(response.data.turfs);
+
+            } catch (error) {
+                console.error("Turfs error:", error);
+                throw error;
+            }
+        }
+        getAllTurfs();
+    }, [isAuthenticated])  
+
+
 
 
     // useEffect(() => {
@@ -70,7 +92,7 @@ function ContextProvide({ children }) {
     //     const user = localStorage.getItem("user");
     //     // console.log("User", user)
     //     if (token && user) {
-    //         // console.log("User", user);
+    //         // console.log("User", user);   
     //         setUser(JSON.parse(user));
     //         setToken(token);
     //         setIsAuthenticated(true);
@@ -112,7 +134,7 @@ function ContextProvide({ children }) {
 
 
     return (
-        <userContext.Provider value={{setAllusers,allusers,loading,setLoading, login, name, setName, user, setUser, token, setToken, register, isAuthenticated, logout, setIsAuthenticated }}>
+        <userContext.Provider value={{setAllusers,ownerTurfs,allusers,loading,setLoading, login, name, setName, user, setUser, token, setToken, register, isAuthenticated, logout, setIsAuthenticated }}>
             {children}
         </userContext.Provider>
     );

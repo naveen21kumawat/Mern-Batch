@@ -10,6 +10,9 @@ import AllUsers from './components/AllUsers'
 import { Navigate } from 'react-router-dom'
 import UserDashboard from './components/UserDashboard'
 import AdminDashboard from './components/AdminDashboard'
+import OwnerDashboard from './components/OwnerDashboard'
+import AddTurf from './components/AddTurf'
+import OwnerTurf from './components/OwnerTurf'
 function App() {
   // const {isAuthenticated} = useContext(userContext)
 
@@ -27,9 +30,13 @@ function App() {
 
             <Route path="/userdashboard" element={<UserDashboard />} />
             <Route path="/admindashboard" element={<AdminDashboard />} />
+            <Route path="/ownerdashboard" element={<OwnerDashboard />} />
+            <Route path="/addturf" element={<AddTurf />} />
           
               <Route path="/profile" element={<Profile />} />
+              
               <Route path="/allusers" element={<AllUsers />} />
+              <Route path="/owner/turfs" element={<OwnerTurf />} />
            
 
             <Route path="*" element={<Navigate to="/" />} />

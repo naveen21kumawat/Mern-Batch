@@ -11,7 +11,8 @@ function Register() {
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    role: 'user' // default role is user
   })
 
   const [loading, setLoading] = useState(false)
@@ -21,6 +22,13 @@ function Register() {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
+    })
+  }
+
+  const handleRoleChange = (e) => {
+    setFormData({
+      ...formData,
+      role: e.target.checked ? 'owner' : 'user'
     })
   }
 
@@ -139,20 +147,35 @@ function Register() {
             </div>
           </div>
 
-          <div className="flex items-center">
-            <input
-              id="terms"
-              name="terms"
-              type="checkbox"
-              required
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-            />
-            <label htmlFor="terms" className="ml-2 block text-sm text-gray-900">
-              I agree to the{' '}
-              <a href="#" className="text-blue-600 hover:text-blue-500">
-                Terms and Conditions
-              </a>
-            </label>
+          <div className="space-y-3">
+            <div className="flex items-center">
+              <input
+                id="registerAsOwner"
+                name="registerAsOwner"
+                type="checkbox"
+                onChange={handleRoleChange}
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <label htmlFor="registerAsOwner" className="ml-2 block text-sm text-gray-900">
+                Register as Owner
+              </label>
+            </div>
+
+            {/* <div className="flex items-center">
+              <input
+                id="terms"
+                name="terms"
+                type="checkbox"
+                required
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <label htmlFor="terms" className="ml-2 block text-sm text-gray-900">
+                I agree to the{' '}
+                <a href="#" className="text-blue-600 hover:text-blue-500">
+                  Terms and Conditions
+                </a>
+              </label>
+            </div> */}
           </div>
 
           <div>

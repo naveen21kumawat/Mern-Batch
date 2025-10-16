@@ -38,12 +38,12 @@ function Login() {
         
         // Redirect to profile page after successful login
         navigate("/profile")
-      } else {
-        setError(res.data.message || 'Login failed')
       }
     } catch (error) {
       console.error('Login error:', error)
-      setError('Login failed. Please try again.')
+      // Extract error message from backend response
+      const errorMessage = error.response?.data?.message || 'Login failed. Please try again.'
+      setError(errorMessage)
     } finally {
       setLoading(false)
     }

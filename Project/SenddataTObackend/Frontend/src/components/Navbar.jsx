@@ -4,8 +4,8 @@ import { useContext } from 'react'
 import { userContext } from '../Context/ContextProvide'
 function Navbar() {
   const { isAuthenticated ,logout,user} = useContext(userContext);
-  console.log(isAuthenticated)
-  console.log(user)
+  // console.log(isAuthenticated)
+  // console.log(user)
   return (
     <nav className="bg-slate-800 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,6 +36,15 @@ function Navbar() {
                 className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 Admin Dashboard
+              </Link>
+              )}
+
+              {  user && user.role === "owner" && (
+                <Link 
+                to="/ownerdashboard" 
+                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              >
+                Owner Dashboard
               </Link>
               )}
 
